@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 import './Navbar.css';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { signInWithRedirect } from 'aws-amplify/auth';
@@ -45,7 +46,8 @@ const Navbar = () => {
                     <button
                         className='signIn'
                         onClick={handleSignIn}>
-                        Sign in
+                        <FontAwesomeIcon icon={faDiscord} />
+                        <span className='text'>Sign in</span>
                     </button>
                 }
             </div>
