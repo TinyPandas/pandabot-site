@@ -1,8 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import './Navbar.css';
+import { useAuthenticator } from '@aws-amplify/ui-react';
+import { signInWithRedirect } from 'aws-amplify/auth';
 
 const Navbar = () => {
+    const { authStatus, signOut } = useAuthenticator();
+    const isAuthenticated = authStatus === 'authenticated';
+
+    const handleSignIn = () => {
+        signInWithRedirect({
+            provider: {
+                custom: "auth0"
+            }
+        })
+    }
+
     return (
         <nav className="navbar">
             <div className="navbar-left">
@@ -18,9 +31,23 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className='navbar-right'>
-                <a href='/account' className='user-icon'>
-                    <FontAwesomeIcon icon={faUser} />
-                </a>
+                { isAuthenticated ? 
+                    <>
+                        <a href='/account' className='user-icon'>
+                            <FontAwesomeIcon icon={faUser} />
+                        </a>
+                        <button
+                            className='signOut'
+                            onClick={signOut}>
+                            Sign out
+                        </button>
+                    </> :
+                    <button
+                        className='signIn'
+                        onClick={handleSignIn}>
+                        Sign in
+                    </button>
+                }
             </div>
         </nav>
     );

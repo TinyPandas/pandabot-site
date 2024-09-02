@@ -39,6 +39,7 @@
 .navbar-right .user-icon {
     color: #fff;
     text-decoration: none;
-    margin-left: 1rem;
     position: relative;
+    margin-right: 10px;
+    margin-left: 10px;
 }
