@@ -5,7 +5,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 const PrivateRoute = (props: { children: React.ReactNode }): JSX.Element => {
     const { children } = props;
     const { authStatus } = useAuthenticator();
-    const isLoggedIn = authStatus === 'authenticated';
+    const isLoggedIn = authStatus !== 'unauthenticated';
     const location = useLocation();
 
     return isLoggedIn ? (
