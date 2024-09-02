@@ -12,11 +12,11 @@ const Account = () => {
 
     const fetchUserProfile = async () => {
         if (user) {
-            const { data: loadedUserProfile } = await client.models.UserProfile.get({
-                id: user.userId
-            });
-            if (loadedUserProfile) {
-                setUserProfile(loadedUserProfile);
+            const { data: allProfiles } = await client.models.UserProfile.list();
+            let matchedProfile = allProfiles.filter(profile => profile.userId === user.userId);
+
+            if (matchedProfile.length > 0) {
+                setUserProfile(matchedProfile[0]);
             } else {
                 const { data: createdUserProfile } = await client.models.UserProfile.create({
                     userId: user.userId,
