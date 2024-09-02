@@ -6,7 +6,7 @@ import { useAuthenticator } from '@aws-amplify/ui-react';
 import { signInWithRedirect } from 'aws-amplify/auth';
 
 const Navbar = () => {
-    const { authStatus, signOut, user } = useAuthenticator((context) => [context.user]);
+    const { authStatus, signOut } = useAuthenticator((context) => [context.user]);
     const isAuthenticated = authStatus === 'authenticated';
 
     const handleSignIn = () => {
