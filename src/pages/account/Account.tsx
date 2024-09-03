@@ -1,5 +1,8 @@
 import './Account.css';
+import { Avatar, Box, Button, Card, CardContent, CardHeader } from '@mui/material';
 import { useEffect, useState } from 'react';
+import BuildCircleIcon from '@mui/icons-material/BuildCircle';
+import Grid from '@mui/material/Grid2';
 import type { Schema } from "../../../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { useAuthenticator } from "@aws-amplify/ui-react";
@@ -37,10 +40,17 @@ const Account = () => {
         fetchUserProfile();
     }, [user]);
 
+    const getDateForCard = (date: string) => {
+        const DateObj = new Date(date);
+        const Day = DateObj.getUTCDate();
+        const Month = Intl.DateTimeFormat('en', { month: 'long' }).format(DateObj);
+        const Year = DateObj.getUTCFullYear();
+        return `${Month} ${Day}, ${Year}`;
+    }
+
     return (
         <div className="accountDetails">
-            <main>
-                <h1>Account Details Page WIP</h1>
+            <main className='accountBody'>
                 { authStatus === 'configuring' ? 
                     <>
                         <h1>Loading...</h1>
@@ -48,8 +58,66 @@ const Account = () => {
                     <>
                         { userProfile ?
                         <>
-                            <h2>Hello {userProfile.username}</h2>
-                            <p>UserId: {userProfile.userId}</p>
+                            <Card sx={{ width: '60%', height: 'fit-content'}}>
+                                <Box sx={{ flexGrow: 1, marginLeft: 'auto', marginRight: 'auto' }}>
+                                    <Grid container spacing={2} sx={{ display: 'flex', marginLeft: '5%', marginRight: '5%', paddingRight: '16px' }}>
+                                        <Grid size={8}>
+                                            <CardHeader
+                                                avatar={
+                                                    <Avatar
+                                                        alt="Avatar"
+                                                        src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                                                        sx={{ width: 56, height: 56}}
+                                                    />
+                                                }
+                                                title={userProfile.username}
+                                                subheader={userProfile.userId}
+                                            />
+                                        </Grid>
+                                        <Grid size={4} container sx={{ alignContent: 'center', justifyContent: 'flex-end' }}>
+                                            <Button disabled variant='contained'>
+                                                <BuildCircleIcon />
+                                                Edit Profile
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+                                <CardContent sx={{ display: 'flex', width: '100%', marginLeft: 'auto', marginRight: 'auto'}}>
+                                    <Card sx={{ width: '28%', marginLeft: '5%', marginRight: '5%' }}>
+                                        <CardHeader
+                                            avatar={
+                                                <Avatar>
+                                                    1
+                                                </Avatar>
+                                            }
+                                            title="Join Date"
+                                            subheader={getDateForCard(userProfile.createdAt)}
+                                        />
+                                    </Card>
+                                    <Card sx={{ width: '28%', marginRight: '5%' }}>
+                                        <CardHeader
+                                            avatar={
+                                                <Avatar>
+                                                    2
+                                                </Avatar>
+                                            }
+                                            title="Placeholder"
+                                            subheader="Placeholder"
+                                        />
+                                    </Card>
+                                    <Card sx={{ width: '28%', marginRight: '5%' }}>
+                                        <CardHeader
+                                            avatar={
+                                                <Avatar>
+                                                    3
+                                                </Avatar>
+                                            }
+                                            title="Placeholder"
+                                            subheader="Placeholder"
+                                        />
+                                    </Card>
+                                </CardContent>
+                            </Card>
                         </> : <h2>Loading...</h2>}
                     </> : null
                 }

@@ -1,5 +1,11 @@
 .accountDetails {
+    display: flexbox;
     width: 60%;
+    margin-top: 35px;
     margin-left: 20%;
     margin-right: 20%;
+}
+
+.accountBody {
+    align-items: center;
 }
