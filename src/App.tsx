@@ -1,10 +1,10 @@
 import '@aws-amplify/ui-react/styles.css';
-import { Authenticator } from '@aws-amplify/ui-react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Home from './pages/home/Home';
 import Account from './pages/account/Account';
-import PrivateRoute from './components/privateRoute/PrivateRoute';
+import { Authenticator } from '@aws-amplify/ui-react';
+import Home from './pages/home/Home';
 import Navbar from './components/navbar/Navbar';
+import PrivateRoute from './components/privateRoute/PrivateRoute';
 
 function App() {
   return (

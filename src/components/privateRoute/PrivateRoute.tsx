@@ -1,6 +1,6 @@
-import { useAuthenticator } from "@aws-amplify/ui-react";
-import React from "react";
 import { Navigate, useLocation } from 'react-router-dom';
+import React from "react";
+import { useAuthenticator } from "@aws-amplify/ui-react"
 
 const PrivateRoute = (props: { children: React.ReactNode }): JSX.Element => {
     const { children } = props;

@@ -1,9 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 import './Navbar.css';
-import { useAuthenticator } from '@aws-amplify/ui-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDiscord } from '@fortawesome/free-brands-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { signInWithRedirect } from 'aws-amplify/auth';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
 const Navbar = () => {
     const { authStatus, signOut } = useAuthenticator((context) => [context.user]);
